@@ -1,0 +1,34 @@
+.left_nav{
+    .twrap{
+        display: flex;
+        justify-content: center;
+        .title{
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Frijole', cursive;
+            font-size: 20px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 8px;
+            animation: animate 4s infinite;
+            line-height: 50px;
+        }
+    }
+}
+
+@keyframes animate{
+    0%{ text-shadow: 0 0 0 white; }
+    40%{
+        color: rgba(255,255,255,0);
+        text-shadow: 0 0 30px white;
+    }
+    70%{
+        color: rgba(255,255,255,0.4);
+        text-shadow: 0 0 10px white;
+    }
+    90%{
+        color: rgba(255,255,255,0.6);
+        text-shadow: 0 0 30px white;
+    }
+    100%{ text-shadow: 0 0 40px rgba(255,255,255,0); }
+}
