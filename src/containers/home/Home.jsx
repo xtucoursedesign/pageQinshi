@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Calendar, Badge } from 'antd';
+import QueueAnim from 'rc-queue-anim';
 
 function getListData(value) {
     let listData;
@@ -65,7 +66,17 @@ export default class Home extends Component {
     
     render() {
         return (
-            <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} style={{padding: '12px', height: "100%"}}/>
+          <QueueAnim
+            animConfig={[
+              { opacity: [1, 0], translateX: [0, 50] },
+              { opacity: [1, 0], translateX: [0, -50] }
+            ]}
+            style={{height: '100%'}}
+          >
+            <div style={{height: '100%'}} key="calendar">
+              <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} style={{padding: '12px', height: "100%", borderRadius: '8px'}}/>
+            </div>
+          </QueueAnim>
         )
     }
 }

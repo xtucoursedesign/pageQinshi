@@ -4,3 +4,4 @@ export const DELETE_USER_INFO = 'delete_user_info';
 export const SAVE_TITLE_INFO = 'save_title_info';
 export const SAVE_FACTORY_INFO = 'save_factory_info';
 export const SAVE_TAG_INFO = 'save_tag_info';
+export const SAVE_LEFT_INFO = 'save_left_info';

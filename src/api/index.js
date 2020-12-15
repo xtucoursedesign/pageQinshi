@@ -24,3 +24,7 @@ export const reqUser = method => myAxios.post(`${BASE_URL}/UserServlet`, {method
 export const reqAddOrUpdateUser = (data) => myAxios.post(`${BASE_URL}/UserServlet`, data);
 // 删除用户
 export const reqMoveUser = (method, uid) => myAxios.post(`${BASE_URL}/UserServlet`, {method, uid});
+// 零件相关
+export const reqPart = (data) => myAxios.post(`${BASE_URL}/PartServlet`, data);
+// 主钢构相关
+export const reqMain = data => myAxios.post(`${BASE_URL}/MainServlet`, data);

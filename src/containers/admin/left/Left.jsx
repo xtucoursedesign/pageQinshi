@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Layout, Menu} from 'antd';
 import {createTitleInfoAction} from '../../../redux/actions/save_title_action';
 import {createTagInfoAction} from '../../../redux/actions/save_tag_action';
+import {createLeftInfoAction} from '../../../redux/actions/save_left_action';
 import {getTitleInfo} from '../../../myFunction/title_info';
 import menu from '../../../config/menu';
 import logo from '../../../static/imgs/logo.png';
@@ -16,24 +17,18 @@ const { SubMenu } = Menu;
     state => ({titleInfo: state.titleInfo, tagInfo: state.tagInfo}),
     {
         saveTileInfo: createTitleInfoAction,
-        saveTagInfo: createTagInfoAction
+        saveTagInfo: createTagInfoAction,
+        saveLeftInfo: createLeftInfoAction,
     }
 )
 @withRouter
 class Left extends Component {
     state = {
         collapsed: false,
-        key: [],
     };
-
-    componentDidMount(){
-        let {pathname} = this.props.location;
-        let data = getTitleInfo(pathname);
-        this.setState({key: data.key});
-    }
     // 点开收起的回调函数
     onCollapse = collapsed => {
-        console.log(collapsed)
+        this.props.saveLeftInfo(collapsed);
         this.setState({collapsed});
     };
 
@@ -47,7 +42,6 @@ class Left extends Component {
         this.props.saveTagInfo({path, current});
         let title = getTitleInfo(parseInt(e.key));
         this.props.saveTileInfo(title);
-        this.setState({key: [e.key]});
     }
 
     createMenu = (menuList) => {
@@ -70,9 +64,22 @@ class Left extends Component {
         })
     }
     render() {
-        const {collapsed, key} = this.state;
+        const {collapsed} = this.state;
+        let key = getTitleInfo(this.props.location.pathname).key;
         return (
-            <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} className="left_nav">
+            <Sider
+                collapsible collapsed={collapsed}
+                onCollapse={this.onCollapse}
+                className="left_nav" 
+                width={200}
+                style={{
+                    overflow: 'auto',
+                    height: '100vh',
+                    position: 'fixed',
+                    left: 0,
+                    zIndex: 2,
+                }}
+            >
                 <div className="twrap">
                     <img src={logo} alt="react" style={{height: '50px'}}/>
                     <span className="title" style={collapsed ? {display: 'none'} : {display: 'block'}}>MRP</span>

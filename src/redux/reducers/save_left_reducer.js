@@ -1,16 +1,16 @@
-import {SAVE_TAG_INFO} from '../action_types';
+import {SAVE_LEFT_INFO} from '../action_types';
 
 let previous = {
-    path: [],
+    collapsed: false,
 }
 
 export default function(previousState = previous, action){
     let {type, data} = action;
     let newState;
     switch (type) {
-        case SAVE_TAG_INFO:
+        case SAVE_LEFT_INFO:
             newState = {
-                path: data.path
+                collapsed: data
             }
             return newState;
         default:

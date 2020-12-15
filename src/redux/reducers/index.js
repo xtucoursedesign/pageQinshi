@@ -4,6 +4,7 @@ import createUserInfoReducer from './create_user_reducer';
 import saveTitleInfoReducer from './save_title_reducer';
 import saveFactoryInfoReducer from './save_factory_reducer';
 import saveTagInfoReducer from './save_tag_reducer';
+import saveLeftInfoReducer from './save_left_reducer';
 
 
 export default combineReducers({
@@ -11,4 +12,5 @@ export default combineReducers({
     titleInfo: saveTitleInfoReducer,
     factoryInfo: saveFactoryInfoReducer,
     tagInfo: saveTagInfoReducer,
+    leftInfo: saveLeftInfoReducer,
 })

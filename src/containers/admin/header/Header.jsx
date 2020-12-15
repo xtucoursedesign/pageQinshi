@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import {Button, Popconfirm, Breadcrumb, Tag} from 'antd';
+import {SyncOutlined} from '@ant-design/icons';
 import {deleteUserInfoAction} from '../../../redux/actions/create_user_action';
 import {dateFormat} from '../../../myFunction/time_format';
 import {reqLocation, reqWeather} from '../../../api';
@@ -66,23 +67,25 @@ class Header extends Component {
     }
 
     closetag = (index) => {
-        let path = [...this.props.tagInfo.path];
-        console.log(path)
-        console.log(index)
-
-        this.props.history.goBack(-1);
+        let path = this.props.tagInfo.path;
+        path.splice(index, 1);
+        let current = '/admin/home'
+        if(path.length !== 0){
+            current = path[path.length - 1];
+        }
+        this.props.history.replace(current);
     }
 
     redirect = (ele) => {
-        this.props.history.go(ele);
+        this.props.history.replace(ele);
     }
     
     render() {
-        let path = [...this.props.tagInfo.path];
+        let path = this.props.tagInfo.path;
         const {name} = this.props.userInfo.user;
         const {pathname} = this.props.location;
         const {time, location, weatherUrl, weatherType, temperature} = this.state;
-        if(path.indexOf(pathname) === -1 && pathname !== '/admin/home'){
+        if(path.indexOf(pathname) === -1 && pathname !== '/admin/home' && pathname !== '/admin'){
             path.push(pathname);
         }
         let title = [];
@@ -92,7 +95,7 @@ class Header extends Component {
             title = getTitleInfo(this.props.location.pathname).titl;
         }
         return (
-            <div className="adminheader">
+            <div className="adminheader" style={this.props.style}>
                 <div className="header-top">
                     <Breadcrumb className="breadcrumb">
                         {
@@ -106,18 +109,19 @@ class Header extends Component {
                             okText="是"
                             cancelText="否"
                             onConfirm={this.loginOut}
+                            style={{position: 'fixed', top: '50px'}}
                         >
                             <Button type="link">退出</Button>
                         </Popconfirm> 
-                    </div> 
+                    </div>
                 </div>
                 <div className="header-bottom">
-                    <Tag onClick={() => this.redirect('/admin/home')} style={{height: '26px', margin: '2px', lineHeight: '24px'}} color={pathname === '/admin/home' ? '#1DA57A' : ''}>
+                    <Tag onClick={() => this.redirect('/admin/home')} style={{height: '26px', margin: '2px', lineHeight: '24px'}} color={pathname === '/admin/home' ? '#87d068' : ''} icon={pathname === '/admin/home' ? <SyncOutlined spin /> : null}>
                         首页
                     </Tag>
                     {
                         path.map((ele, index) => (
-                            <Tag key={ele} closable onClose={() => this.closetag(index)} onClick={() => this.redirect(ele)} style={{height: '26px', margin: '2px', lineHeight: '24px'}} color={pathname === ele ? '#1DA57A' : ''}>
+                            <Tag key={ele} closable onClose={() => this.closetag(index)} onClick={() => this.redirect(ele)} style={{height: '26px', margin: '2px', lineHeight: '24px'}} color={pathname === ele ? '#87d068' : ''} icon={pathname === ele ? <SyncOutlined spin /> : null}>
                                 {getTitleInfo(ele).last}
                             </Tag>
                         ))

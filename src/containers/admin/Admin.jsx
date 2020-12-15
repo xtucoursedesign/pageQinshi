@@ -18,21 +18,21 @@ const { Content, Footer } = Layout;
 
 
 @connect(
-    state => ({userInfo: state.userInfo, titleInfo: state.titleInfo}),
+    state => ({userInfo: state.userInfo, titleInfo: state.titleInfo, leftInfo: state.leftInfo}),
     {
         
     }
 )
 class Admin extends Component {
-
     render() {
         const {isLogin} = this.props.userInfo;
+        const {collapsed} = this.props.leftInfo;
         if(isLogin){
             return (
                 <Layout style={{minHeight: '100vh'}}>
                     <Left></Left>
-                    <Layout className="site-layout">
-                        <Header></Header>
+                    <Layout className="site-layout" style={{marginLeft: collapsed ? '80px' : '200px'}}>
+                        <Header style={{width: collapsed ? 'calc(100% - 80px)' : 'calc(100% - 200px)', position: 'fixed', zIndex: '1'}}></Header>
                         <Content className="admin_content">
                             <div className="site-layout-background" style={{height: "100%"}}>
                                 <Switch>

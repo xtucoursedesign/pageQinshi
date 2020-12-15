@@ -6,7 +6,7 @@
 
 ------------------------------------------------------------
 
-> 每个接口需要的Header参数值（登录接口不需要）
+> 每个接口需要的参数值（登录接口不需要）
 
 ------------------------------------------------------------
 
@@ -31,29 +31,18 @@ token  |String|Y    |登录的token|
 6. 修改工厂信息
 7. 获取所有用户信息
 8. 更新或添加用户
-
-```json
-2. 添加用户
-3. 更新用户
-4. 获取所有用户列表
-5. 删除用户
-6. 获取分类列表
-7. 添加分类
-8. 更新分类名称
-9. 根据分类ID获取分类
-10. 获取商品分页列表
-11. 根据name/desc搜索产品分页列表
-12. 根据商品ID获取商品
-13. 添加商品
-14. 更新商品
-15. 对商品进行上架/下架处理
-16. 上传图片
-17. 删除图片
-18. 添加角色
-19. 获取角色列表
-20. 更新角色(给角色设置权限)
-
-```
+9. 删除用户
+10. 分页获取零件信息
+11. 分页搜索零件信息
+12. 删除零件信息
+13. 添加零件信息
+14. 上传图片或文件
+15. 修改零件信息
+16. 分页获取主钢构信息
+17. 分页搜索主钢构信息
+18. 删除主钢构信息
+19. 添加主钢构信息
+20. 修改主钢构信息
 
 ## 1. 登录
 
@@ -259,6 +248,12 @@ token  |String|Y    |登录的token|
     ]
   }
 }
+
+// 失败
+{
+  "status": 2,
+  "msg": "暂无数据"
+}
 ```
 
 ## 5. 添加工厂
@@ -377,6 +372,12 @@ token  |String|Y    |登录的token|
     ]
   }
 }
+
+// 失败
+{
+  "status": 2,
+  "msg": "暂无数据"
+}
 ```
 
 ## 8. 更新或添加用户
@@ -431,6 +432,617 @@ token  |String|Y    |登录的token|
 {
   "status": 1,
   "msg": "添加失败!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "编号重复!"
+}
+```
+
+## 9. 删除用户
+
+### 删除用户信息请求URL
+
+> <http://localhost:8080/xtuproject/UserServlet>
+
+### 删除用户信息请求方式
+
+> POST
+
+### 删除用户信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|uid         |Y       |string   |用户编号                         |
+|method      |Y       |string   |方法 removeUser                  |
+
+### 删除用户信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "删除成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "删除失败!"
+}
+```
+
+## 10. 分页获取零件信息
+
+### 分页获取零件信息请求URL
+
+> <http://localhost:8080/xtuproject/PartServlet>
+
+### 分页获取零件信息请求方式
+
+> POST
+
+### 分页获取零件信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|page        |Y       |string   |指定页数                         |
+|method      |Y       |string   |方法 getPartByPage               |
+
+### 分页获取零件信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "data": {
+    "part": {
+      "list": [
+        {
+          "pid": "00000000001",
+          "name": "中齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 55,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]"
+        },
+        {
+          "pid": "00000000002",
+          "name": "大齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 58,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]"
+        }
+      ],
+    "current": 1,
+    "totalPage": 0,
+    "totalCount": 3
+    }
+  }
+}
+
+// 失败
+{
+  "status": 1,
+  "msg": "页码出错!"
+}
+
+// 失败
+{
+  "status": 2,
+  "msg": "暂无数据"
+}
+```
+
+## 11. 分页搜索零件信息
+
+### 分页搜索零件信息请求URL
+
+> <http://localhost:8080/xtuproject/PartServlet>
+
+### 分页搜索零件信息请求方式
+
+> POST
+
+### 分页搜索零件信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|page        |Y       |string   |指定页数                         |
+|method      |Y       |string   |方法 getPartBySearch             |
+|searchType  |Y       |string   |搜索类型                         |
+|searchKeyWord|Y      |string   |搜索关键字                       |
+
+### 分页搜索零件信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "data": {
+    "part": {
+      "list": [
+        {
+          "pid": "00000000001",
+          "name": "中齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 55,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]"
+        },
+        {
+          "pid": "00000000002",
+          "name": "大齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 58,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]"
+        }
+      ],
+    "current": 1,
+    "totalPage": 2,
+    "totalCount": 3
+    }
+  }
+}
+
+// 失败
+{
+  "status": 1,
+  "msg": "页码出错!"
+}
+
+// 失败
+{
+  "status": 2,
+  "msg": "暂无数据"
+}
+```
+
+## 12. 删除零件信息
+
+### 删除零件信息请求URL
+
+> <http://localhost:8080/xtuproject/PartServlet>
+
+### 删除零件信息请求方式
+
+> POST
+
+### 删除零件信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|method      |Y       |string   |方法 removePart                 |
+|pid         |Y       |string   |零件编号                         |
+
+### 分删除零件信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "删除成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "删除失败!"
+}
+```
+
+## 13. 添加零件信息
+
+### 添加零件信息请求URL
+
+> <http://localhost:8080/xtuproject/PartServlet>
+
+### 添加零件信息请求方式
+
+> POST
+
+### 添加零件信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|method      |Y       |string   |方法 insertPart                 |
+|pid         |Y       |string   |零件编号                         |
+|name        |Y       |string   |零件名字                         |
+|material    |Y       |string   |零件材料                         |
+|specifi     |Y       |string   |零件规格                         |
+|texture     |Y       |string   |零件材质                         |
+|weight      |Y       |string   |零件重量                         |
+|img         |Y       |string   |零件图片json串格式               |
+|unit        |Y       |string   |零件单位                         |
+
+### 添加零件零件信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "添加成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "添加失败!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "编号重复!"
+}
+```
+
+## 14. 上传图片或文件
+
+### 上传图片或文件信息请求URL
+
+> <http://localhost:8080/xtuproject/FileUploadServlet>
+
+### 上传图片或文件信息请求方式
+
+> POST
+
+### 上传图片或文件信息参数类型
+
+文件本身
+
+### 上传图片或文件信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "data": {
+      "img": {
+        "uid": "d1763a3f665b478b800202254f7e0207",
+        "name": "2_xxx.jpg",
+        "status": "done",
+        "url": "/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg"
+      }
+  }
+}
+```
+
+## 15. 修改零件信息
+
+### 修改零件信息请求URL
+
+> <http://localhost:8080/xtuproject/PartServlet>
+
+### 修改零件信息请求方式
+
+> POST
+
+### 修改零件信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|method      |Y       |string   |方法 updatePart                 |
+|pid         |Y       |string   |零件编号                         |
+|name        |Y       |string   |零件名字                         |
+|material    |Y       |string   |零件材料                         |
+|specifi     |Y       |string   |零件规格                         |
+|texture     |Y       |string   |零件材质                         |
+|weight      |Y       |string   |零件重量                         |
+|img         |Y       |string   |零件图片json串格式               |
+|unit        |Y       |string   |零件单位                         |
+|oldPid      |Y       |string   |旧的零件编号                     |
+
+### 修改零件零件信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "修改成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "修改失败!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "编号重复!"
+}
+```
+
+## 16. 分页获取主钢构信息
+
+### 分页获取主钢构信息请求URL
+
+> <http://localhost:8080/xtuproject/MainServlet>
+
+### 分页获取主钢构信息请求方式
+
+> POST
+
+### 分页获取主钢构信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|page        |Y       |string   |指定页数                         |
+|method      |Y       |string   |方法 getMainByPage               |
+
+### 分页获取主钢构信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "data": {
+    "main": {
+      "list": [
+        {
+          "mid": "00000000001",
+          "name": "中齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 55,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]",
+          "unit": "kg"
+        },
+        {
+          "mid": "00000000002",
+          "name": "大齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 58,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]",
+          "unit": "kg"
+        }
+      ],
+    "current": 1,
+    "totalPage": 0,
+    "totalCount": 3
+    }
+  }
+}
+
+// 失败
+{
+  "status": 1,
+  "msg": "页码出错!"
+}
+
+// 失败
+{
+  "status": 2,
+  "msg": "暂无数据"
+}
+```
+
+## 17. 分页搜索主钢构信息
+
+### 分页搜索主钢构信息请求URL
+
+> <http://localhost:8080/xtuproject/MainServlet>
+
+### 分页搜索主钢构信息请求方式
+
+> POST
+
+### 分页搜索主钢构信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|page        |Y       |string   |指定页数                         |
+|method      |Y       |string   |方法 getMainBySearch             |
+|searchType  |Y       |string   |搜索类型                         |
+|searchKeyWord|Y      |string   |搜索关键字                       |
+
+### 分页搜索主钢构信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "data": {
+    "part": {
+      "list": [
+        {
+          "mid": "00000000001",
+          "name": "中齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 55,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]"
+        },
+        {
+          "mid": "00000000002",
+          "name": "大齿轮",
+          "material": "铁",
+          "specifi": "普通规格",
+          "texture": "生铁",
+          "weight": 58,
+          "img": "[{
+            'uid': 'd1763a3f665b478b800202254f7e0207',
+            'name': '2_xxx.jpg',
+            'status': 'done',
+            'url': '/image/51abcca6ea4049498834aadfa2772dc52_milkdue.jpg'
+          }]"
+        }
+      ],
+    "current": 1,
+    "totalPage": 2,
+    "totalCount": 3
+    }
+  }
+}
+
+// 失败
+{
+  "status": 1,
+  "msg": "页码出错!"
+}
+
+// 失败
+{
+  "status": 2,
+  "msg": "暂无数据"
+}
+```
+
+## 18. 删除主钢构信息
+
+### 删除主钢构信息请求URL
+
+> <http://localhost:8080/xtuproject/MainServlet>
+
+### 删除主钢构信息请求方式
+
+> POST
+
+### 删除主钢构信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|method      |Y       |string   |方法 removeMain                 |
+|pid         |Y       |string   |零件编号                         |
+
+### 分删除主钢构信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "删除成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "删除失败!"
+}
+```
+
+## 19. 添加主钢构信息
+
+### 添加主钢构信息请求URL
+
+> <http://localhost:8080/xtuproject/MainServlet>
+
+### 添加主钢构信息请求方式
+
+> POST
+
+### 添加主钢构信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|method      |Y       |string   |方法 insertPart                 |
+|mid         |Y       |string   |零件编号                         |
+|name        |Y       |string   |零件名字                         |
+|material    |Y       |string   |零件材料                         |
+|specifi     |Y       |string   |零件规格                         |
+|texture     |Y       |string   |零件材质                         |
+|weight      |Y       |string   |零件重量                         |
+|img         |Y       |string   |零件图片json串格式               |
+|unit        |Y       |string   |零件单位                         |
+
+### 添加主钢构信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "添加成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "添加失败!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "编号重复!"
+}
+```
+
+## 20. 修改主钢构信息
+
+### 修改主钢构信息请求URL
+
+> <http://localhost:8080/xtuproject/MainServlet>
+
+### 修改主钢构信息请求方式
+
+> POST
+
+### 修改主钢构信息参数类型
+
+|参数        |是否必选 |类型      |说明                            |
+|:----------:|:------:|:-------:|:------------------------------:|
+|method      |Y       |string   |方法 updateMain                 |
+|mid         |Y       |string   |零件编号                         |
+|name        |Y       |string   |零件名字                         |
+|material    |Y       |string   |零件材料                         |
+|specifi     |Y       |string   |零件规格                         |
+|texture     |Y       |string   |零件材质                         |
+|weight      |Y       |string   |零件重量                         |
+|img         |Y       |string   |零件图片json串格式               |
+|unit        |Y       |string   |零件单位                         |
+|oldPid      |Y       |string   |旧的零件编号                     |
+
+### 修改主钢构信息返回示例
+
+```json
+// 成功
+{
+  "status": 0,
+  "msg": "修改成功!"
+}
+// 失败
+{
+  "status": 1,
+  "msg": "修改失败!"
 }
 // 失败
 {
