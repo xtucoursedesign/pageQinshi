@@ -12,9 +12,15 @@ import Factory from '../factory/Factory';
 import Main from '../main/Main';
 import Part from '../part/Part';
 import Line from '../line/Line';
+import Layoff from '../layoff/Layoff';
+import LayoffAddOrUpdate from '../layoff/LayoffAddOrUpdate';
+import Assembly from '../assembly/Assembly';
+import AssemblyAddOrUpdate from '../assembly/AssemblyAddOrUpdate';
+import PreAssembly from '../preassembly/PreAssembly';
+import PreAssemblyAddOrUpdate from '../preassembly/PreAssemblyAddOrUpdate';
 import './admin.less';
 
-const { Content, Footer } = Layout;
+const {Content, Footer} = Layout;
 
 
 @connect(
@@ -37,6 +43,15 @@ class Admin extends Component {
                             <div className="site-layout-background" style={{height: "100%"}}>
                                 <Switch>
                                     <Route path="/admin/home" component={Home}></Route>
+                                    <Route path="/admin/project/layoff/:pid/addlayoff" component={LayoffAddOrUpdate}></Route>
+                                    <Route path="/admin/project/layoff/:pid/:lid" component={LayoffAddOrUpdate}></Route>
+                                    <Route path="/admin/project/layoff/:pid" component={Layoff}></Route>
+                                    <Route path="/admin/project/assembly/:pid/addassembly" component={AssemblyAddOrUpdate}></Route>
+                                    <Route path="/admin/project/assembly/:pid/:aid" component={AssemblyAddOrUpdate}></Route>
+                                    <Route path="/admin/project/assembly/:pid" component={Assembly}></Route>
+                                    <Route path="/admin/project/preassembly/:pid/addpreassembly" component={PreAssemblyAddOrUpdate}></Route>
+                                    <Route path="/admin/project/preassembly/:pid/:paid" component={PreAssemblyAddOrUpdate}></Route>
+                                    <Route path="/admin/project/preassembly/:pid" component={PreAssembly}></Route>
                                     <Route path="/admin/project" component={Project}></Route>
                                     <Route path="/admin/user" component={User}></Route>
                                     <Route path="/admin/factory" component={Factory}></Route>

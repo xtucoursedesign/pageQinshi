@@ -128,7 +128,7 @@ class User extends Component {
             ref={node => {
               this.searchInput = node;
             }}
-            placeholder={`search ${dataIndex}`}
+            placeholder={`请输入姓名关键字`}
             value={selectedKeys[0]}
             onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
             onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}

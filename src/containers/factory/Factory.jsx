@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Form, Input, Card, Button, Table, Modal, message, Spin } from 'antd';
 import {connect} from 'react-redux';
 import QueueAnim from 'rc-queue-anim';
-import { PlusOutlined } from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import {TweenOneGroup} from 'rc-tween-one';
-import {reqFactory, reqAddFactory, reqRemoveFactory, reqUpdateFactory} from '../../api'
+import {reqFactory, reqAddFactory, reqRemoveFactory, reqUpdateFactory} from '../../api';
 import {PAGE_SIZE} from '../../config';
 import {createFactoryInfoAction} from '../../redux/actions/save_factory_action';
 

@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import {List, Card, Descriptions, Image, Button, Skeleton, PageHeader, Select, Input, Spin, message, Popconfirm, Modal, Form} from 'antd';
 import QueueAnim from 'rc-queue-anim';
-import {PlusOutlined, SearchOutlined, SyncOutlined} from '@ant-design/icons';
+import {PlusOutlined, SearchOutlined, SyncOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import {reqMain} from '../../api';
 import {COUNT} from '../../config';
 import Photo from '../photo/Photo';
+import {PROXY, PROJECTNAME} from '../../config';
 
 const {Option} = Select;
 
@@ -188,7 +189,8 @@ export default class Main extends Component {
                                     <Input size="large" placeholder="请输入关键字，支持模糊查询" style={{width: 400, marginRight: 20}} onChange={({target}) => this.setState({searchKeyWord: target.value})}/>
                                     
                                     <Button icon={<SearchOutlined />} size="large" style={{width: '93px', marginRight: 20, backgroundColor: '#409EFF', color: 'white'}} type="text" onClick={this.searchMains}>搜索</Button>
-                                    <Button icon={<SyncOutlined />} size="large" style={{width: '93px', backgroundColor: '#67C23A', color: 'white'}} type="text" onClick={this.reset}>重置</Button>
+                                    <Button icon={<SyncOutlined />} size="large" style={{width: '93px', marginRight: 20, backgroundColor: '#67C23A', color: 'white'}} type="text" onClick={this.reset}>重置</Button>
+                                    <Button icon={<ArrowDownOutlined />} size="large" style={{width: '93px', backgroundColor: '#EBB563', color: 'white'}} type="text" href={PROXY + PROJECTNAME + "/MainServlet?method=exportAllMain"}>导出</Button>
                                 </PageHeader>
                             }
                             renderItem={item => (

@@ -25,6 +25,14 @@ export const reqAddOrUpdateUser = (data) => myAxios.post(`${BASE_URL}/UserServle
 // 删除用户
 export const reqMoveUser = (method, uid) => myAxios.post(`${BASE_URL}/UserServlet`, {method, uid});
 // 零件相关
-export const reqPart = (data) => myAxios.post(`${BASE_URL}/PartServlet`, data);
+export const reqPart = data => myAxios.post(`${BASE_URL}/PartServlet`, data);
 // 主钢构相关
 export const reqMain = data => myAxios.post(`${BASE_URL}/MainServlet`, data);
+// 项目相关
+export const reqProject = data => myAxios.post(`${BASE_URL}/ProjectServlet`, data);
+// 下料相关
+export const reqLayoff = data => myAxios.post(`${BASE_URL}/LayoffServlet`, data);
+// 二次装配相关
+export const reqAssembly = data => myAxios.post(`${BASE_URL}/AssemblyServlet`, data);
+// 组装相关
+export const reqPreAssembly = data => myAxios.post(`${BASE_URL}/PreassemblyServlet`, data);
