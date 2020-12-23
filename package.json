@@ -1,6 +1,7 @@
 {
   "name": "xtu",
   "version": "0.1.0",
+  "homepage": "/xtuproject",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.12.1",

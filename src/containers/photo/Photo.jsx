@@ -78,7 +78,7 @@ export default class Photo extends Component {
         return (
             <div>
               <Upload
-                action={`${BASE_URL}/FileUploadServlet`}
+                action={`${BASE_URL}/FileUploadServlet?method=upload`}
                 method="POST" // 请求方式
                 listType="picture-card"
                 fileList={fileList}

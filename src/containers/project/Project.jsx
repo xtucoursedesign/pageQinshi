@@ -49,22 +49,28 @@ class Project extends Component {
 
     // 获取项目信息
     getAllProject = async () => {
-        let result = await reqProject({method: 'getAllProject'});
-        if(result.status === 2){
-            message.warning(result.msg, 1);
-        }
-        let {project} = result.data;
         let factories;
         if(this.props.factoryInfo){
             factories = [...this.props.factoryInfo.factories];
         }else{
             let factoryInfo = await reqFactory();
             if(factoryInfo.status === 2){
-                message.warning(result.msg, 1);
+                message.warning(factoryInfo.msg, 1);
+                this.setState({isLoading: false});
+                return;
             }else{
                 factories = factoryInfo.data.factories;
             }
         }
+        this.setState({factories});
+        let result = await reqProject({method: 'getAllProject'});
+        if(result.status === 2){
+            message.warning(result.msg, 1);
+            this.setState({isLoading: false});
+            return;
+        }
+        let {project} = result.data;
+        
         // console.log(project);
         // console.log(factories) 
         this.dueProject(project, factories);

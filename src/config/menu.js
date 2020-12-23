@@ -47,26 +47,26 @@ let menu = [
         path: '/admin/part',
         icon: <SettingOutlined />
     },
-    {
-        title: '图形图表',
-        key: "6",
-        path: '/admin/char',
-        icon: <AreaChartOutlined />,
-        children: [
-            {
-                title: '饼状图',
-                key: "7",
-                path: '/admin/char/pie',
-                icon: <PieChartOutlined />
-            },
-            {
-                title: '柱状图',
-                key: "8",
-                path: '/admin/char/line',
-                icon: <BarChartOutlined />
-            }
-        ]
-    }
+    // {
+    //     title: '图形图表',
+    //     key: "6",
+    //     path: '/admin/char',
+    //     icon: <AreaChartOutlined />,
+    //     children: [
+    //         {
+    //             title: '饼状图',
+    //             key: "7",
+    //             path: '/admin/char/pie',
+    //             icon: <PieChartOutlined />
+    //         },
+    //         {
+    //             title: '柱状图',
+    //             key: "8",
+    //             path: '/admin/char/line',
+    //             icon: <BarChartOutlined />
+    //         }
+    //     ]
+    // }
 ]
 
 export default menu;

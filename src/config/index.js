@@ -2,7 +2,7 @@
  * 通用配置文件
  */
 
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'http://localhost:8080/xtuproject';
 
 export const PROXY = 'http://localhost:8080';
 

@@ -188,19 +188,14 @@ class User extends Component {
     };
 
     getAllUser = async () => {
-      let result = await reqUser('getAllUser');
-      if(result.status === 2){
-        message.warning(result.msg, 1);
-        this.setState({isLoading: false});
-        return;
-      }
-      let {users} = result.data;
       let factories;
       // 如果为空就从请求，否则从redux中获取
       if(!this.props.factoryInfo){
         let factoryList = await reqFactory();
         if(factoryList.status === 2){
           message.warning(factoryList.msg, 1);
+          this.setState({isLoading: false});
+          return;
         }else{
           factories = factoryList.data.factories;
           this.props.saveFactoryInfo(factories);
@@ -208,8 +203,16 @@ class User extends Component {
       }else{
         factories = this.props.factoryInfo.factories;
       }
-
-      this.dueUser(users, factories);
+      let result = await reqUser('getAllUser');
+      if(result.status === 2){
+        message.warning(result.msg, 1);
+        this.setState({isLoading: false});
+        return;
+      }
+      let {users} = result.data;
+      if(users){
+        this.dueUser(users, factories);
+      }
     }
 
 
